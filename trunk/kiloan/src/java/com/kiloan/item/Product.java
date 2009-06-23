@@ -1,10 +1,17 @@
 package com.kiloan.item;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
 /**
  * Prototype objects for products that is to be bidded
  *
  * @author Tata
  */
+@PersistenceCapable(identityType=IdentityType.APPLICATION)
 public class Product implements Comparable {
 
     public Product(String id, String name, String description, float price, String pictureURI, String dateAdded) {
@@ -63,11 +70,19 @@ public class Product implements Comparable {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    @PrimaryKey
+    @Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
     private String id;
+    @Persistent
     private String name;
+    @Persistent
     private String description;
+    @Persistent
     private float price;
+    @Persistent
     private String pictureURI;
+    @Persistent
     private String dateAdded;
 
     public int compareTo(Object o) {
